@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class UserDto implements Serializable {
 	private static final long serialVersionUID = 7869249981468165963L;
 	private String id; // id sur la base de donnee
-	private String userId; // l'id qui est retourner
+	private String userId; // l'id qui est retourner mais n'est pas l'id en BD
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
 	private String encryptedpassword;
 	private String emailVerificationToken;
-	private String emailVerificationStatus;
+	private Boolean emailVerificationStatus = false;
 
 	public String getId() {
 		return id;
@@ -78,11 +78,11 @@ public class UserDto implements Serializable {
 		this.emailVerificationToken = emailVerificationToken;
 	}
 
-	public String getEmailVerificationStatus() {
+	public Boolean getEmailVerificationStatus() {
 		return emailVerificationStatus;
 	}
 
-	public void setEmailVerificationStatus(String emailVerificationStatus) {
+	public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
 		this.emailVerificationStatus = emailVerificationStatus;
 	}
 

@@ -21,6 +21,9 @@ import com.bee_studio_mobile.app.ws.ui.model.response.UserRest;
 @RestController
 @RequestMapping("users") // http://localhoat:8080/users/methods
 public class UserController {
+	//initialisation de l'interface utilisateur
+	@Autowired
+	UserService userService;
 
 	@GetMapping
 	public String getUser() {
@@ -31,10 +34,7 @@ public class UserController {
 
 	@PostMapping
 	public UserRest createUser(@RequestBody UserDetailRequestModel userDetail) {
-		//initialisation de l'interface utilisateur
 
-		@Autowired
-		UserService userService;
 
 		//ici je recrois le sinformation de lutilisateur
 		UserRest returnValue = new UserRest();
@@ -42,7 +42,7 @@ public class UserController {
 		// utilisateur en le Dto grace a BeanUtils
 		UserDto userDto = new UserDto();
 		BeanUtils.copyProperties(userDetail,userDto);
-		//ici je creait un nouvell utilisateu de type UserDto
+		//ici je creai un nouvel utilisateu de type UserDto
 		//qui est retourner a la fin grace au userService
 		//que je convertis encore en type UserRest pour la reponse
 		UserDto createUser = userService.createUser(userDto);
