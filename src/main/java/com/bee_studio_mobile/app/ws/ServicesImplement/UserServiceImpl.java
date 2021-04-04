@@ -24,11 +24,14 @@ public class UserServiceImpl implements UserService {
         userEntity.setEncryptedpassword("root");
         userEntity.setUserId("my_user_id");
 
-        UserEntity storedUserDetail = userRepository.save(userEntity);
+        if (userRepository.findByEmail(userDto.getEmail())==null){
+            UserEntity storedUserDetail = userRepository.save(userEntity);
+            UserDto newUserDto = new UserDto();
+            BeanUtils.copyProperties(storedUserDetail,newUserDto);
+            return newUserDto;
+        }else{
+           throw new RuntimeException("Cet email existe deja , veillez le changer");
+        }
 
-        UserDto newUserDto = new UserDto();
-        BeanUtils.copyProperties(storedUserDetail,newUserDto);
-
-        return newUserDto;
     }
 }

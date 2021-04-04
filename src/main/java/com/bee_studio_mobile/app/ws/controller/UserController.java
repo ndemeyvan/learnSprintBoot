@@ -1,6 +1,7 @@
 package com.bee_studio_mobile.app.ws.controller;
 
 import com.bee_studio_mobile.app.ws.dto.UserDto;
+import com.bee_studio_mobile.app.ws.response.UserDetailRequestModel;
 import com.bee_studio_mobile.app.ws.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.bee_studio_mobile.app.ws.Model.reponse.request.UserDetailRequestModel;
 import com.bee_studio_mobile.app.ws.ui.model.response.UserRest;
 
 /*
