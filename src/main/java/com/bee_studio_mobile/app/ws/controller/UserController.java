@@ -19,7 +19,7 @@ import com.bee_studio_mobile.app.ws.Model.request.UserRest;
  *  il est neccessaire d'ajouter ces annotations
  * */
 @RestController
-@RequestMapping("users") // http://localhoat:8080/users/methods
+@RequestMapping("users") // http://localhoat:8080/users/
 public class UserController {
 	//initialisation de l'interface utilisateur
 	@Autowired
@@ -34,8 +34,6 @@ public class UserController {
 
 	@PostMapping
 	public UserRest createUser(@RequestBody UserDetailRequestModel userDetail) {
-
-
 		//ici je recrois le sinformation de lutilisateur
 		UserRest returnValue = new UserRest();
 		//ici je convertis les informations

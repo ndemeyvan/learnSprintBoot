@@ -8,7 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
+//cette classe sert a mettre
+// certaine regle sur des route
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
@@ -25,16 +26,22 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL)
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and().addFilter(new AuthenticationFilter(authenticationManager()));
+                .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL).permitAll()
+                .anyRequest().authenticated()
+                .and().addFilter(getAuthenticationFilter());
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailService).passwordEncoder(bCryptPasswordDecoder);
+    }
+
+    //cette emthods defini une nouvelle
+    // route de connexion utilisateur
+    public AuthenticationFilter getAuthenticationFilter() throws Exception {
+        final AuthenticationFilter filter = new AuthenticationFilter(authenticationManager());
+        filter.setFilterProcessesUrl("/users/login");
+        return filter;
     }
 
 }

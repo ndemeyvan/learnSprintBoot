@@ -1,6 +1,9 @@
 package com.bee_studio_mobile.app.ws.security;
 
 import com.bee_studio_mobile.app.ws.Model.request.UserLoginRequestModel;
+import com.bee_studio_mobile.app.ws.context.SpringApplicationContext;
+import com.bee_studio_mobile.app.ws.dto.UserDto;
+import com.bee_studio_mobile.app.ws.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,7 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+///Cette classe sert a filtrer les authentifications
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
@@ -38,10 +41,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        String userName = ((User) authResult.getPrincipal()).getUsername(); // dams notre cas est l'email
+        String userName = ((User) authResult.getPrincipal()).getUsername(); // dams notre cas userName est l'email
         String token = Jwts.builder().setSubject(userName).setExpiration(new Date(System.currentTimeMillis()+SecurityConstants.EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512,SecurityConstants.TOKEN_SECRET)
                 .compact();
+
+        UserService userService = (UserService) SpringApplicationContext.getBean("userServiceImpl");
+        UserDto userDto = userService.getUser(userName); // dams notre cas userName est l'email
         response.addHeader(SecurityConstants.HEADER_STRING,SecurityConstants.TOKEN_PREFIX+token);
+        response.addHeader("UserId",userDto.getUserId());
     }
 }

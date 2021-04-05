@@ -1,7 +1,7 @@
 package com.bee_studio_mobile.app.ws.dto;
 
 import java.io.Serializable;
-
+///le Dto est la classe qui fait la correspondance avec la base de donnee
 public class UserDto implements Serializable {
 	private static final long serialVersionUID = 7869249981468165963L;
 	private String id; // id sur la base de donnee
