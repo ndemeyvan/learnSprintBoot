@@ -14,30 +14,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 //cette classe sert a filtrer
-// les autorisations utilisateur
+// les autorisations utilisateur exple Bearer dans le header ect ....
 public class AuthorizationFilter extends BasicAuthenticationFilter {
-
 
     public AuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
-
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         //donne moi les header
         String header = request.getHeader(SecurityConstants.HEADER_STRING);
-
         if (header == null || !header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
             return;
         }
-
         UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
-
-
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
@@ -46,14 +40,13 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             token = token.replace(SecurityConstants.TOKEN_PREFIX, "");
             String user = Jwts.parser()
                     .setSigningKey(SecurityConstants.TOKEN_SECRET)
-                    .parseClaimsJwt(token)
+                    .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
             if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }
             return null;
-
         }
         return null;
     }
