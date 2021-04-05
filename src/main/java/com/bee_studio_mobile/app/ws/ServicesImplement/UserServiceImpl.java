@@ -33,32 +33,42 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto userDto) {
 
         UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(userDto,userEntity);
+        BeanUtils.copyProperties(userDto, userEntity);
         //Genere un userId public
         String publicUserId = utils.generateUSerId(30);
         userEntity.setEncryptedpassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userEntity.setUserId(publicUserId);
 
-        if (userRepository.findByEmail(userDto.getEmail())!=null) throw new RuntimeException("Cet email existe deja , veillez le changer");
+        if (userRepository.findByEmail(userDto.getEmail()) != null)
+            throw new RuntimeException("Cet email existe deja , veillez le changer");
 
         UserEntity storedUserDetail = userRepository.save(userEntity);
-            UserDto newUserDto = new UserDto();
-            BeanUtils.copyProperties(storedUserDetail,newUserDto);
-            return newUserDto;
+        UserDto newUserDto = new UserDto();
+        BeanUtils.copyProperties(storedUserDetail, newUserDto);
+        return newUserDto;
     }
 
     @Override
     public UserDto getUser(String email) {
         UserEntity userEntity = userRepository.findByEmail(email);
         UserDto returnValue = new UserDto();
-        BeanUtils.copyProperties(userEntity,returnValue);
+        BeanUtils.copyProperties(userEntity, returnValue);
+        return returnValue;
+    }
+
+    @Override
+    public UserDto getUserById(String id) {
+        UserEntity userEntity = userRepository.findByUserId(id);
+        UserDto returnValue = new UserDto();
+        if (userEntity == null) throw new UsernameNotFoundException(id);
+        BeanUtils.copyProperties(userEntity, returnValue);
         return returnValue;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByEmail(email);
-        if (userEntity ==null)throw new UsernameNotFoundException(email);
-        return new User(userEntity.getEmail(),userEntity.getEncryptedpassword(),new ArrayList<>());
+        if (userEntity == null) throw new UsernameNotFoundException(email);
+        return new User(userEntity.getEmail(), userEntity.getEncryptedpassword(), new ArrayList<>());
     }
 }

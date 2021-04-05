@@ -5,13 +5,7 @@ import com.bee_studio_mobile.app.ws.response.UserDetailRequestModel;
 import com.bee_studio_mobile.app.ws.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.bee_studio_mobile.app.ws.Model.request.UserRest;
 
 /*
@@ -25,11 +19,12 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping
-	public String getUser() {
-
-		return "la methode getUser() a ete appele";
-
+	@GetMapping(path="/{id}")
+	public UserRest getUser(@PathVariable String id) {
+		UserRest returnValue = new UserRest();
+		UserDto user = userService.getUserById(id);
+		BeanUtils.copyProperties(user,returnValue);
+		return returnValue;
 	}
 
 	@PostMapping
