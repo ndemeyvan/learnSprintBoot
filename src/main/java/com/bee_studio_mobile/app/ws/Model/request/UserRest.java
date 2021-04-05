@@ -1,4 +1,4 @@
-package com.bee_studio_mobile.app.ws.ui.model.response;
+package com.bee_studio_mobile.app.ws.Model.request;
 
 public class UserRest {
 

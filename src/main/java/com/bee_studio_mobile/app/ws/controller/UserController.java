@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.bee_studio_mobile.app.ws.ui.model.response.UserRest;
+import com.bee_studio_mobile.app.ws.Model.request.UserRest;
 
 /*
  * Ces anotation permet a cette classe de recevoir des requetes http
