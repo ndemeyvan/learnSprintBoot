@@ -5,9 +5,7 @@ import com.example.demo.model.Location;
 import com.example.demo.model.User;
 import com.example.demo.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +38,14 @@ public class UserController {
     public User getUser(@PathVariable String id) {
         return userService.getSingleUser(id);
     }
+
+
+    //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
+    @RequestMapping(value ="/users",method = RequestMethod.POST)
+    public void addLocation(@RequestBody User user){
+        userService.addUser(user);
+    }
+
 
 
 }

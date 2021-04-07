@@ -4,6 +4,7 @@ import com.example.demo.model.Location;
 import com.example.demo.model.User;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class UsersService {
     User user1 = new User("u1", "Jany", "Lawrence", new Location("l1", "Douala"), "NdemeYvan@gmail.com");
     User user2 = new User("u2", "Akah", "Larry", new Location("l1", "Douala"), "akah@gmail.com");
-    List<User> listOfUser = Arrays.asList(user1, user2);
+    List<User> listOfUser = new ArrayList<User>( Arrays.asList(user1, user2));
 
     public List<User> getAllUsers() {
         return listOfUser;
@@ -25,5 +26,9 @@ public class UsersService {
                 .findFirst().orElse(null);
         System.out.println("This is the user " + user.getFirstName());
         return user;
+    }
+
+    public void addUser(User user) {
+        listOfUser.add(user);
     }
 }

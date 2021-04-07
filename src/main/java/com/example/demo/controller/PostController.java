@@ -4,9 +4,7 @@ import com.example.demo.model.User;
 import com.example.demo.services.PostsService;
 import com.example.demo.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +36,12 @@ public class PostController {
     @RequestMapping(value = "/posts/{id}")
     public Post getSinglePost(@PathVariable String id){
         return postService.getSinglePost(id);
+    }
+
+    //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
+    @RequestMapping(value ="/posts",method = RequestMethod.POST)
+    public void addPost(@RequestBody Post post){
+        postService.addPost(post);
     }
 
 }
