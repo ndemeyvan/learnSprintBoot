@@ -45,7 +45,7 @@ public class PostController {
     }
 
     //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
-    @RequestMapping(value ="/locations/{id}",method = RequestMethod.PUT)
+    @RequestMapping(value ="/posts/{id}",method = RequestMethod.PUT)
     public void updateUser(@PathVariable String id,@RequestBody Post post){
         postService.updatePost(id,post);
     }
