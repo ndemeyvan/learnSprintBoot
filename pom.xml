@@ -28,14 +28,26 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--Dependance de spring pour faire une application de type web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<!--Dependance de spring pour faire les appel rest -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<!--Dependance de manipulation de BD -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!--Dependance pour la sauvegarde de donnee en In memory database-->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 
