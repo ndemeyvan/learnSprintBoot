@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.model.Location;
+import com.example.demo.model.Post;
 import com.example.demo.model.User;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,11 @@ public class UsersService {
                 listOfUser.set(i,user);
             }
         }
+    }
+
+    public void deleteUser(String id) {
+
+        listOfUser.removeIf(l->l.getId().equals(id));
+
     }
 }

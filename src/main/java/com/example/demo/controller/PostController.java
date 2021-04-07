@@ -50,4 +50,10 @@ public class PostController {
         postService.updatePost(id,post);
     }
 
+    //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
+    @RequestMapping(value ="/posts/{id}",method = RequestMethod.DELETE)
+    public void deletePost(@PathVariable String id){
+        postService.deletePost(id);
+    }
+
 }

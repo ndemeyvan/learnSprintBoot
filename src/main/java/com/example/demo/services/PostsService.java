@@ -42,4 +42,9 @@ public class PostsService {
         }
 
     }
+
+    public void deletePost(String id) {
+        listOfPost.removeIf(l->l.getId().equals(id));
+
+    }
 }

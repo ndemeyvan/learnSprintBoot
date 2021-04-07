@@ -52,6 +52,10 @@ public class UserController {
         userService.updateUser(id,user);
     }
 
-
+    //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
+    @RequestMapping(value ="/users/{id}",method = RequestMethod.DELETE)
+    public void deleteLocation(@PathVariable String id){
+        userService.deleteUser(id);
+    }
 
 }
