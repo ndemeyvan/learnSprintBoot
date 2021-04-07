@@ -32,4 +32,14 @@ public class PostsService {
     public void addPost(Post post) {
         listOfPost.add(post);
     }
+
+    public void updatePost(String id, Post post) {
+        for (int i =0; i < listOfPost.size() ; i++ ){
+            Post l = listOfPost.get(i);
+            if(l.getId().equals(id)){
+                listOfPost.set(i,post);
+            }
+        }
+
+    }
 }

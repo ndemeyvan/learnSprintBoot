@@ -12,7 +12,7 @@ import java.util.List;
 public class UsersService {
     User user1 = new User("u1", "Jany", "Lawrence", new Location("l1", "Douala"), "NdemeYvan@gmail.com");
     User user2 = new User("u2", "Akah", "Larry", new Location("l1", "Douala"), "akah@gmail.com");
-    List<User> listOfUser = new ArrayList<User>( Arrays.asList(user1, user2));
+    List<User> listOfUser = new ArrayList<>( Arrays.asList(user1, user2));
 
     public List<User> getAllUsers() {
         return listOfUser;
@@ -30,5 +30,14 @@ public class UsersService {
 
     public void addUser(User user) {
         listOfUser.add(user);
+    }
+
+    public void updateUser(String id,User user){
+        for (int i =0; i < listOfUser.size() ; i++ ){
+            User l = listOfUser.get(i);
+            if(l.getId().equals(id)){
+                listOfUser.set(i,user);
+            }
+        }
     }
 }

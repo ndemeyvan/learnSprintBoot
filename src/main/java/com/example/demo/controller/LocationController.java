@@ -42,5 +42,10 @@ public class LocationController {
     public void addLocation(@RequestBody Location location){
         locationsService.addLocation(location);
     }
+    //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
+    @RequestMapping(value ="/locations/{id}",method = RequestMethod.PUT)
+    public void updateLocation(@PathVariable String id,@RequestBody Location location){
+            locationsService.updateLocation(id,location);
+    }
 
 }
