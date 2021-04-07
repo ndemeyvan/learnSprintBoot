@@ -3,6 +3,8 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Location;
 import com.example.demo.model.User;
+import com.example.demo.services.UsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +19,11 @@ import java.util.List;
 @RestController
 public class UserController {
 
+    //ceci marque l'injection de
+    // dependance de ctte classe
+    @Autowired
+    private UsersService userService;
+
 
     //cette annotaion permet de dire
     // a spring que ceci est un chemin qui
@@ -24,9 +31,13 @@ public class UserController {
     //Retourne moi une liste d'utilisateur
     @RequestMapping(value = "/users")
     public List<User> getAllUsers() {
-        User user1 = new User("u1", "Jany", "Lawrence", new Location("l1", "Douala"), "NdemeYvan@gmail.com");
-        User user2 = new User("u2", "Akah", "Larry", new Location("l1", "Douala"), "akah@gmail.com");
-        return Arrays.asList(user1, user2);
+        return userService.getAllUsers();
     }
+
+    @RequestMapping(value = "/users/{id}")
+    public User getUser() {
+        return null;
+    }
+
 
 }
