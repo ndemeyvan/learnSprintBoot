@@ -5,6 +5,7 @@ import com.example.demo.model.Location;
 import com.example.demo.model.User;
 import com.example.demo.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,10 +34,11 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
-
+    //{id} permet de dire que c'est une variable
+    //@PathVariable stipule que le parametre de la methode doit venir du endpoind
     @RequestMapping(value = "/users/{id}")
-    public User getUser() {
-        return null;
+    public User getUser(@PathVariable String id) {
+        return userService.getSingleUser(id);
     }
 
 

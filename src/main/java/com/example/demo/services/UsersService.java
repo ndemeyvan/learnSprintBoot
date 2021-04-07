@@ -16,4 +16,14 @@ public class UsersService {
     public List<User> getAllUsers() {
         return listOfUser;
     }
+
+    public User getSingleUser(String id) {
+        //ici on utilise les Stream
+        //filtre la list des utilisateur , compare la avec l'id qui est filtrer avec chaque element de la liste ,
+        // si cela correspond renvoi moi le premier element , sinon renvoi moi null
+        User user = listOfUser.stream().filter(r -> id.equals(r.getId()))
+                .findFirst().orElse(null);
+        System.out.println("This is the user " + user.getFirstName());
+        return user;
+    }
 }
