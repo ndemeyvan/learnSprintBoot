@@ -1,15 +1,26 @@
-package com.example.demo.model;
+package com.example.demo.models;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /*
  * Cette classe represente le model de la table de
  * User qui seront utiliser dans la base de donnee
+ * @Entity permet de specifie a spring que ceci est une table dans notre BD
  * */
+@Entity
 public class User {
+    //@Id permet de dire que ceci est la
+    // cle primaire de cette classe
+    @Id
     private String id;
     private String firstName;
     private String lastName;
     private Location location;
     private String email;
+
+    public User() {
+    }
 
     public User(String id, String firstName, String lastName, Location location, String email) {
         this.id = id;

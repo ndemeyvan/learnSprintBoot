@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Location;
-import com.example.demo.model.User;
+import com.example.demo.models.User;
 import com.example.demo.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /*
  * Annotation qui stipule que cette classe est un controller de type REST
@@ -35,7 +34,7 @@ public class UserController {
     //{id} permet de dire que c'est une variable
     //@PathVariable stipule que le parametre de la methode doit venir du endpoind
     @RequestMapping(value = "/users/{id}")
-    public User getUser(@PathVariable String id) {
+    public Optional<User> getUser(@PathVariable String id) {
         return userService.getSingleUser(id);
     }
 

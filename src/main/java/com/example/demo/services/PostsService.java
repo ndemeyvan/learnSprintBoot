@@ -1,50 +1,56 @@
 package com.example.demo.services;
 
-import com.example.demo.model.Location;
-import com.example.demo.model.Post;
-import com.example.demo.model.User;
+import com.example.demo.Repositories.LocationRepository;
+import com.example.demo.Repositories.PostRepository;
+import com.example.demo.models.Location;
+import com.example.demo.models.Post;
+import com.example.demo.models.User;
+import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostsService {
-    Post post1 = new Post("p1", "10 Jan 2021", new User("u1", "Jany", "Lawrence", new Location("l1", "Douala"), "NdemeYvan@gmail.com"), "RAS");
-    Post post2 = new Post("p2", "10 Jan 2021", new User("u2", "Cabrel ", "Kemfang", new Location("l2", "Douala"), "CabrelKemfang@gmail.com"), "RAS");
-
-    List<Post> listOfPost = new ArrayList<>(Arrays.asList(post1, post2));
+    @Autowired
+    private PostRepository postRepository;
 
     public List<Post> getAllPosts() {
-        return listOfPost;
+        List<Post> posts = new ArrayList<>();
+        postRepository.findAll().forEach(posts::add);
+        return posts;
     }
 
-    public Post getSinglePost(String id) {
-        //ici on utilise les Stream
-        //filtre la list des utilisateur , compare la avec l'id qui est filtrer avec chaque element de la liste ,
-        // si cela correspond renvoi moi le premier element , sinon renvoi moi null
-        Post post = listOfPost.stream().filter(r -> id.equals(r.getId()))
-                .findFirst().orElse(null);
-        return post;
+    public Optional<Post> getSinglePost(String id) {
+        return postRepository.findById(id);
     }
 
     public void addPost(Post post) {
-        listOfPost.add(post);
+        postRepository.save(post);
     }
 
-    public void updatePost(String id, Post post) {
-        for (int i =0; i < listOfPost.size() ; i++ ){
-            Post l = listOfPost.get(i);
-            if(l.getId().equals(id)){
-                listOfPost.set(i,post);
+    public void updatePost(String id, Post post) throws NotFoundException {
+        Post updatedPost = postRepository.findById(id).orElseThrow(() -> new NotFoundException("Id not found"));
+        if (updatedPost == null) {
+
+        } else {
+            if (updatedPost.getDetails() == null) {
+                //throws error tell client name  is empty
+            } else {
+                updatedPost.setDetails(post.getDetails());
+                postRepository.save(updatedPost);
             }
+
         }
 
     }
 
     public void deletePost(String id) {
-        listOfPost.removeIf(l->l.getId().equals(id));
+        postRepository.deleteById(id);
 
     }
 }

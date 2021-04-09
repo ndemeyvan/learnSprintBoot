@@ -1,8 +1,8 @@
-package com.example.demo.model;
+package com.example.demo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+///Initiation au CRUD JPA
 //cette classe marque l'entre dans une nouvelle section du cour avec Java Persistence api (JPA)
 //@Entity permet de specifie a spring que ceci est une table dans notre BD
 @Entity

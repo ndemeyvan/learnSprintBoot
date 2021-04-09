@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Student;
+import com.example.demo.models.Student;
 import com.example.demo.services.StudentService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

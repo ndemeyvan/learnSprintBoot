@@ -1,8 +1,8 @@
 package com.example.demo.services;
 
 
-import com.example.demo.Repository.StudentRepository;
-import com.example.demo.model.Student;
+import com.example.demo.Repositories.StudentRepository;
+import com.example.demo.models.Student;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ public class StudentService {
 
         } else {
             if (student.getName() == null || student.getDepartement() == null) {
-
+                    //throws error tell client name and departement is empty
             } else {
                 student1.setName(student.getName());
                 student1.setDepartement(student.getDepartement());

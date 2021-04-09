@@ -1,50 +1,45 @@
 package com.example.demo.services;
 
-import com.example.demo.model.Location;
-import com.example.demo.model.Post;
-import com.example.demo.model.User;
+import com.example.demo.Repositories.UserRepository;
+import com.example.demo.models.Post;
+import com.example.demo.models.User;
+import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersService {
-    User user1 = new User("u1", "Jany", "Lawrence", new Location("l1", "Douala"), "NdemeYvan@gmail.com");
-    User user2 = new User("u2", "Akah", "Larry", new Location("l1", "Douala"), "akah@gmail.com");
-    List<User> listOfUser = new ArrayList<>( Arrays.asList(user1, user2));
+    @Autowired
+    private UserRepository userRepository;
 
     public List<User> getAllUsers() {
-        return listOfUser;
+        List<User> users = new ArrayList<>();
+        userRepository.findAll().forEach(users::add);
+        return users;
+
     }
 
-    public User getSingleUser(String id) {
-        //ici on utilise les Stream
-        //filtre la list des utilisateur , compare la avec l'id qui est filtrer avec chaque element de la liste ,
-        // si cela correspond renvoi moi le premier element , sinon renvoi moi null
-        User user = listOfUser.stream().filter(r -> id.equals(r.getId()))
-                .findFirst().orElse(null);
-        System.out.println("This is the user " + user.getFirstName());
-        return user;
+    public Optional<User> getSingleUser(String id) {
+        return userRepository.findById(id);
     }
 
     public void addUser(User user) {
-        listOfUser.add(user);
+
+        userRepository.save(user);
     }
 
     public void updateUser(String id,User user){
-        for (int i =0; i < listOfUser.size() ; i++ ){
-            User l = listOfUser.get(i);
-            if(l.getId().equals(id)){
-                listOfUser.set(i,user);
-            }
-        }
+        userRepository.save(user);
+
     }
 
     public void deleteUser(String id) {
 
-        listOfUser.removeIf(l->l.getId().equals(id));
+        userRepository.deleteById(id);
 
     }
 }
