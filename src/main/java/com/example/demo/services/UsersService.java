@@ -32,9 +32,25 @@ public class UsersService {
         userRepository.save(user);
     }
 
-    public void updateUser(String id,User user){
-        userRepository.save(user);
+    public void updateUser(String id, User user) throws NotFoundException {
+        User userUpdated = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Id not found"));
+        if (userUpdated == null) {
 
+        } else {
+            if (userUpdated.getFirstName() == null
+                    || userUpdated.getLocation() == null
+                    || userUpdated.getEmail() == null
+                    || userUpdated.getLastName() == null) {
+                //throws error tell client name  is empty
+            } else {
+                userUpdated.setLocation(user.getLocation());
+                userUpdated.setLastName(user.getLastName());
+                userUpdated.setFirstName(user.getFirstName());
+                userUpdated.setEmail(user.getEmail());
+                userRepository.save(userUpdated);
+            }
+
+        }
     }
 
     public void deleteUser(String id) {

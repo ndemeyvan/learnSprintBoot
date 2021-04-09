@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.models.User;
 import com.example.demo.services.UsersService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +48,7 @@ public class UserController {
 
     //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
     @RequestMapping(value ="/users/{id}",method = RequestMethod.PUT)
-    public void updateUser(@PathVariable String id,@RequestBody User user){
+    public void updateUser(@PathVariable String id,@RequestBody User user) throws NotFoundException {
         userService.updateUser(id,user);
     }
 
