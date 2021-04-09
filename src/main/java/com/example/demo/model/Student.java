@@ -8,7 +8,11 @@ import javax.persistence.Id;
 @Entity
 public class Student {
 
-        //@Id permet de dire que ceci est la
+
+    public Student() {
+    }
+
+    //@Id permet de dire que ceci est la
         // cle primaire de cette classe
         @Id
         private String id;
