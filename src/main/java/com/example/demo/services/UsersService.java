@@ -19,6 +19,7 @@ public class UsersService {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
+
         return users;
 
     }
@@ -57,5 +58,12 @@ public class UsersService {
 
         userRepository.deleteById(id);
 
+    }
+
+    public List<User> getUserByLocation(String locationId){
+        List<User> users = new ArrayList<>();
+        userRepository.findByLocationId(locationId).forEach(users::add);
+
+        return users;
     }
 }

@@ -1,6 +1,9 @@
 package com.example.demo.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 ///Initiation au CRUD JPA
 //cette classe marque l'entre dans une nouvelle section du cour avec Java Persistence api (JPA)
@@ -14,7 +17,8 @@ public class Student {
 
     //@Id permet de dire que ceci est la
         // cle primaire de cette classe
-        @Id
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
         private String id;
         private String name;
         private String departement;

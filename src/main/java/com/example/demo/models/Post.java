@@ -1,7 +1,11 @@
 package com.example.demo.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /*
  * Cette classe represente le model de la table de
@@ -12,9 +16,11 @@ import javax.persistence.Id;
 public class Post {
     //@Id permet de dire que ceci est la
     // cle primaire de cette classe
-    @Id
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
     private String postdate;
+    @ManyToOne
     private User user;
     private String details;
 

@@ -1,7 +1,12 @@
 package com.example.demo.models;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.ManyToAny;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /*
  * Cette classe represente le model de la table de
@@ -12,10 +17,12 @@ import javax.persistence.Id;
 public class User {
     //@Id permet de dire que ceci est la
     // cle primaire de cette classe
-    @Id
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
     private String firstName;
     private String lastName;
+    @ManyToOne
     private Location location;
     private String email;
 

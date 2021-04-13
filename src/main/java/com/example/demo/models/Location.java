@@ -1,7 +1,11 @@
 package com.example.demo.models;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /*
@@ -14,7 +18,8 @@ public class Location {
 
     //@Id permet de dire que ceci est la
     // cle primaire de cette classe
-    @Id
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
     private String name;
 

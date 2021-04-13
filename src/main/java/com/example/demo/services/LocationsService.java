@@ -1,9 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.Repositories.LocationRepository;
-import com.example.demo.Repositories.StudentRepository;
 import com.example.demo.models.Location;
-import com.example.demo.models.Student;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -53,4 +53,10 @@ public class PostsService {
         postRepository.deleteById(id);
 
     }
+
+    public List<Post> getUserByUserId(String userId){
+        List<Post> posts = new ArrayList<>();
+        postRepository.findByUserId(userId).forEach(posts::add);
+        return posts;
+    }
 }
