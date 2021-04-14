@@ -60,10 +60,16 @@ public class UsersService {
 
     }
 
-    public List<User> getUserByLocation(String locationId){
+    public List<User> getUserByLocationId(String locationId){
         List<User> users = new ArrayList<>();
         userRepository.findByLocationId(locationId).forEach(users::add);
 
+        return users;
+    }
+
+    public List<User> getUserByFirstName(String locationId){
+        List<User> users = new ArrayList<>();
+        userRepository.findByFirstName(locationId).forEach(users::add);
         return users;
     }
 }

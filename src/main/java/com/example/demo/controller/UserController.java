@@ -58,4 +58,15 @@ public class UserController {
         userService.deleteUser(id);
     }
 
+    //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
+    @RequestMapping(value ="/users/location/{id}",method = RequestMethod.GET)
+    public List<User> getUserByLocationId(@PathVariable String id){
+        return userService.getUserByLocationId(id);
+    }
+
+    //@RequestBody stipule l'objet qui sera passe iic va venir du body de la requete
+    @RequestMapping(value ="/users/firstName/{firstName}",method = RequestMethod.GET)
+    public List<User> getUserByFirstName(@PathVariable String firstName){
+        return userService.getUserByFirstName(firstName);
+    }
 }
